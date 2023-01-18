@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.http import HttpResponse
 from .models import Book
 
@@ -21,3 +21,12 @@ class BookAdd(CreateView):
     model = Book
     fields = '__all__'
     success_url = '/wan2read'
+
+class BookUpdate(UpdateView):
+  model = Book
+  # Let's disallow the renaming of a cat by excluding the name field!
+  fields = ['title', 'author', 'genre']
+
+class BookDelete(DeleteView):
+  model = Book
+  success_url = '/wan2read/'
